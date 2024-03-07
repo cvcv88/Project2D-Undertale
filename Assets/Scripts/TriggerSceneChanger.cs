@@ -1,14 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class floweyglowTrigger : MonoBehaviour
+public class TriggerSceneChanger : MonoBehaviour
 {
-	private void OnTriggerEnter2D(Collider collider)
+	[SerializeField] GameObject dialogue;
+	[SerializeField] Animator animator;
+
+	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		if(collider.name == "Trigger1")
+		if(collider.gameObject.name == "Trigger1")
 		{
-			transform.Translate(0, 0, 0);
+			Debug.Log("플라위");
+			transform.position = new Vector3(12, 8, 0);
+		}
+
+		if (collider.gameObject.name == "Trigger2")
+		{
+			Debug.Log("토리엘등장 후 집 가는 게이트");
+			// transform.position = new Vector3();
+		}
+
+		if (collider.gameObject.name == "FloweyDialogue")
+		{
+			Debug.Log("Flowey Dialogue Start");
+			dialogue.SetActive(true);
+
+			PlayerInput playerInput = gameObject.GetComponent<PlayerInput>();
+			playerInput.enabled = false;
+
+			PlayerMove playerMove = gameObject.GetComponent<PlayerMove>();
+			playerMove.enabled = false;
+
+			animator.SetBool("BackWalk", false);
+
+			playerMove.upFlag = false;
+			playerMove.downFlag = false;
+			playerMove.rightFlag = false;
+			playerMove.leftFlag = false;
 		}
 	}
 }
