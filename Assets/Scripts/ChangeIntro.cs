@@ -8,17 +8,18 @@ public class ChangeIntro : MonoBehaviour
     public Image Img_Renderer;
     public Sprite[] sprite;
 
+	Coroutine coroutine;
 	private void Start()
 	{
-		StartCoroutine(ChangeIntroImages());
+		coroutine = StartCoroutine(ChangeIntroImages());
 	}
 
 	private void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.KeypadEnter))
 		{
-			StopCoroutine(ChangeIntroImages());
 			Img_Renderer.sprite = sprite[sprite.Length - 1];
+			StopCoroutine(coroutine);
 		}
 	}
 
