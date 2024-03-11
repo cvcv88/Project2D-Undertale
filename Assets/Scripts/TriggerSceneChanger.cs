@@ -31,14 +31,7 @@ public class TriggerSceneChanger : MonoBehaviour
 			playerInput.enabled = false;
 
 			PlayerMove playerMove = gameObject.GetComponent<PlayerMove>();
-			playerMove.enabled = false;
-
-			animator.SetBool("BackWalk", false);
-
-			playerMove.upFlag = false;
-			playerMove.downFlag = false;
-			playerMove.rightFlag = false;
-			playerMove.leftFlag = false;
+			playerMove.StopAnimation();
 		}
 	}
 }

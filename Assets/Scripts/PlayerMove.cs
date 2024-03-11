@@ -55,50 +55,39 @@ public class PlayerMove : MonoBehaviour
 			leftFlag = true;
 		}
 
-		if (!Input.anyKey)
-		{
-			if(upFlag)
-			{
-				animator.Play("BackIdle");
-			}
-			if(downFlag)
-			{
-				animator.Play("FrontIdle");
-			}
-			if(rightFlag)
-			{
-				animator.Play("RightIdle");
-			}
-			if(leftFlag)
-			{
-				animator.Play("LeftIdle");
-			}
-		}
+		StopAnimation();
 	}
 
 	private void Move()
     {
 		transform.position += new Vector3(moveDir.x * moveSpeed, moveDir.y * moveSpeed, 0) * Time.deltaTime;
-		/*if (Input.GetKey(KeyCode.RightArrow))
-		{
-			transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
-		}
-		if (Input.GetKey(KeyCode.LeftArrow))
-		{
-			transform.Translate(-Vector2.right * moveSpeed * Time.deltaTime);
-		}
-		if (Input.GetKey(KeyCode.UpArrow))
-		{
-			transform.Translate(Vector2.up * moveSpeed * Time.deltaTime);
-		}
-		if (Input.GetKey(KeyCode.DownArrow))
-		{
-			transform.Translate(-Vector2.up * moveSpeed * Time.deltaTime);
-		}*/
 	}
 
     private void OnMove(InputValue value)
     {
         moveDir = value.Get<Vector2>();
     }
+
+	public void StopAnimation()
+	{
+		if (!Input.anyKey)
+		{
+			if (upFlag)
+			{
+				animator.Play("BackIdle");
+			}
+			if (downFlag)
+			{
+				animator.Play("FrontIdle");
+			}
+			if (rightFlag)
+			{
+				animator.Play("RightIdle");
+			}
+			if (leftFlag)
+			{
+				animator.Play("LeftIdle");
+			}
+		}
+	}
 }
