@@ -1,4 +1,3 @@
-using System.Collections; // IEnumerator
 using UnityEngine;
 using UnityEngine.UI; // Text
 
@@ -27,7 +26,8 @@ namespace DialogueSystem
 
 		private void Start()
 		{
-			StartCoroutine(WriteText(input, textHolder, textColor, textFont, delay, sound, delayBetweenLine));
+			StartCoroutine(WriteText(input, textHolder, textColor,
+				textFont, delay, sound, delayBetweenLine));
 		}
 	}
 }

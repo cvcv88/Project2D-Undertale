@@ -20,13 +20,4 @@ public class SoundManager : MonoBehaviour
 	{
 		source.PlayOneShot(sound);
 	}
-
-	public void PauseSound()
-	{
-		source.Pause();
-	}
-	public void ChangeSound(AudioClip changeAudioClip)
-	{
-		source.clip = changeAudioClip;
-	}
 }

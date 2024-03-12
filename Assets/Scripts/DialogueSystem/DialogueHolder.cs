@@ -1,16 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.U2D;
 
 namespace DialogueSystem
 {
 	public class DialogueHolder : MonoBehaviour
 	{
+		[SerializeField] Animator animator;
+
 		private void Awake()
 		{
 			StartCoroutine(DialogueSequence());
+		}
+		private void Start()
+		{
+			animator = GetComponent<Animator>();
 		}
 		private IEnumerator DialogueSequence()
 		{
@@ -21,6 +24,7 @@ namespace DialogueSystem
 				yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
 			}
 			gameObject.SetActive(false);
+			animator.SetTrigger("Next");
 		}
 		private void Deactivate()
 		{
