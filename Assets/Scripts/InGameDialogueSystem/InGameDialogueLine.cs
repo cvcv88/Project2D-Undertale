@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI; // Text
 
-namespace DialogueSystem
+namespace InGameDialogueSystem
 {
-	public class DialogueLine : DialogueBaseClass
+	public class InGameDialogueLine : InGameDialogueBaseClass
 	{
 		[Header("Text Options")]
 		private Text textHolder;
@@ -16,6 +16,10 @@ namespace DialogueSystem
 		[SerializeField] private float delay;
 		[SerializeField] private float delayBetweenLine;
 
+		[Header("Character Image")]
+		[SerializeField] private Sprite characterSprite;
+		[SerializeField] private Image imageHolder;
+
 		[Header("Sound")]
 		[SerializeField] private AudioClip sound;
 
@@ -23,6 +27,9 @@ namespace DialogueSystem
 		{
 			textHolder = GetComponent<Text>();
 			textHolder.text = "";
+
+			imageHolder.sprite = characterSprite;
+			imageHolder.preserveAspect = true;
 		}
 
 		private void Start()
@@ -34,7 +41,7 @@ namespace DialogueSystem
 		{
 			if (Input.GetKey(KeyCode.Z) || input == "-")
 			{
-				
+
 			}
 		}
 	}

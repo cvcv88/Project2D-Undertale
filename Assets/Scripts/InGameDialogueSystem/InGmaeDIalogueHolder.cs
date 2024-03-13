@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-namespace DialogueSystem
+namespace InGameDialogueSystem
 {
-	public class DialogueHolder : MonoBehaviour
+	public class InGameDialogueHolder : MonoBehaviour
 	{
 		[SerializeField] Animator animator;
 		[SerializeField] AudioSource audioSource;
@@ -19,7 +19,7 @@ namespace DialogueSystem
 			{
 				Deactivate();
 				transform.GetChild(i).gameObject.SetActive(true);
-				yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
+				yield return new WaitUntil(() => transform.GetChild(i).GetComponent<InGameDialogueLine>().finished);
 
 				animator.SetTrigger("Next");
 

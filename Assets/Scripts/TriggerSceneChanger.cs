@@ -10,7 +10,7 @@ public class TriggerSceneChanger : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		if(collider.gameObject.name == "Trigger1")
+		if (collider.gameObject.name == "Trigger1")
 		{
 			Debug.Log("«√∂Û¿ß");
 			transform.position = new Vector3(12, 8, 0);
@@ -22,7 +22,7 @@ public class TriggerSceneChanger : MonoBehaviour
 			// transform.position = new Vector3();
 		}
 
-		if (collider.gameObject.name == "FloweyDialogue")
+		if (collider.gameObject.name == "Flowey")
 		{
 			Debug.Log("Flowey Dialogue Start");
 			dialogue.SetActive(true);
@@ -32,6 +32,12 @@ public class TriggerSceneChanger : MonoBehaviour
 
 			PlayerMove playerMove = gameObject.GetComponent<PlayerMove>();
 			playerMove.StopAnimation();
+
+			if (Input.GetKey(KeyCode.Z))
+			{
+				playerInput.enabled = true;
+				dialogue.SetActive(false);
+			}
 		}
 	}
 }
