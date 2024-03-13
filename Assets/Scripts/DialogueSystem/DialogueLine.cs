@@ -29,14 +29,6 @@ namespace DialogueSystem
 		{
 			StartCoroutine(WriteText(input, textHolder, textColor, textFont, delay, sound, delayBetweenLine));
 		}
-
-		private void Update()
-		{
-			if (Input.GetKey(KeyCode.Z) || input == "-")
-			{
-				
-			}
-		}
 	}
 }
 

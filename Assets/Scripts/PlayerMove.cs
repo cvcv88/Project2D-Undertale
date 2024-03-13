@@ -5,15 +5,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+	[SerializeField] Animator animator;
 
-    [SerializeField] float moveSpeed;
-    private Vector2 moveDir;
+	[SerializeField] float moveSpeed;
+	private Vector2 moveDir;
 
-	public bool upFlag = false;
-	public bool downFlag = false;
-	public bool rightFlag = false;
-	public bool leftFlag = false;
+	private FloweyController flowey;
+
+	private bool upFlag = false;
+	private bool downFlag = false;
+	private bool rightFlag = false;
+	private bool leftFlag = false;
 
 	private void FixedUpdate()
 	{
@@ -22,51 +24,53 @@ public class PlayerMove : MonoBehaviour
 
 	private void Update()
 	{
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-			animator.Play("BackWalk");
-			upFlag = true;
-			downFlag = false;
-			rightFlag = false;
-			leftFlag = false;
-        }
-		else if (Input.GetKeyDown(KeyCode.DownArrow))
+		if (!inDialogue())
 		{
-			animator.Play("FrontWalk");
-			upFlag = false;
-			downFlag = true;
-			rightFlag = false;
-			leftFlag = false;
+			if (Input.GetKeyDown(KeyCode.UpArrow))
+			{
+				animator.Play("BackWalk");
+				upFlag = true;
+				downFlag = false;
+				rightFlag = false;
+				leftFlag = false;
+			}
+			else if (Input.GetKeyDown(KeyCode.DownArrow))
+			{
+				animator.Play("FrontWalk");
+				upFlag = false;
+				downFlag = true;
+				rightFlag = false;
+				leftFlag = false;
+			}
+			else if (Input.GetKeyDown(KeyCode.RightArrow))
+			{
+				animator.Play("RightWalk");
+				upFlag = false;
+				downFlag = false;
+				rightFlag = true;
+				leftFlag = false;
+			}
+			else if (Input.GetKeyDown(KeyCode.LeftArrow))
+			{
+				animator.Play("LeftWalk");
+				upFlag = false;
+				downFlag = false;
+				rightFlag = false;
+				leftFlag = true;
+			}
+			StopAnimation();
 		}
-		else if(Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			animator.Play("RightWalk");
-			upFlag = false;
-			downFlag = false;	
-			rightFlag = true;
-			leftFlag = false;
-		}
-		else if(Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			animator.Play("LeftWalk");
-			upFlag = false;
-			downFlag = false;
-			rightFlag = false;
-			leftFlag = true;
-		}
-
-		StopAnimation();
 	}
 
 	private void Move()
-    {
+	{
 		transform.position += new Vector3(moveDir.x * moveSpeed, moveDir.y * moveSpeed, 0) * Time.deltaTime;
 	}
 
-    private void OnMove(InputValue value)
-    {
-        moveDir = value.Get<Vector2>();
-    }
+	private void OnMove(InputValue value)
+	{
+		moveDir = value.Get<Vector2>();
+	}
 
 	public void StopAnimation()
 	{
@@ -89,5 +93,26 @@ public class PlayerMove : MonoBehaviour
 				animator.Play("LeftIdle");
 			}
 		}
+	}
+
+	private bool inDialogue()
+	{
+		if (flowey != null)
+			return flowey.DialogueActive();
+		else return false;
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "Flowey")
+		{
+			flowey = collision.gameObject.GetComponent<FloweyController>();
+			flowey.ActivateDialogue();
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		flowey = null;
 	}
 }

@@ -21,23 +21,5 @@ public class TriggerSceneChanger : MonoBehaviour
 			Debug.Log("토리엘등장 후 집 가는 게이트");
 			// transform.position = new Vector3();
 		}
-
-		if (collider.gameObject.name == "Flowey")
-		{
-			Debug.Log("Flowey Dialogue Start");
-			dialogue.SetActive(true);
-
-			PlayerInput playerInput = gameObject.GetComponent<PlayerInput>();
-			playerInput.enabled = false;
-
-			PlayerMove playerMove = gameObject.GetComponent<PlayerMove>();
-			playerMove.StopAnimation();
-
-			if (Input.GetKey(KeyCode.Z))
-			{
-				playerInput.enabled = true;
-				dialogue.SetActive(false);
-			}
-		}
 	}
 }

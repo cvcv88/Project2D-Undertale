@@ -13,6 +13,16 @@ namespace DialogueSystem
 			StartCoroutine(DialogueSequence());
 		}
 
+		private void Update()
+		{
+			if (Input.GetKey(KeyCode.Z))
+			{
+				Deactivate();
+				animator.SetTrigger("Skip");
+				gameObject.SetActive(false);
+			}
+		}
+
 		private IEnumerator DialogueSequence()
 		{
 			for (int i = 0; i < transform.childCount; i++)
