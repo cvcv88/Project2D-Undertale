@@ -20,6 +20,7 @@ namespace DialogueSystem
 				Deactivate();
 				animator.SetTrigger("Skip");
 				gameObject.SetActive(false);
+				audioSource.Stop();
 			}
 		}
 

@@ -36,14 +36,6 @@ namespace InGameDialogueSystem
 		{
 			StartCoroutine(WriteText(input, textHolder, textColor, textFont, delay, sound));
 		}
-
-		private void Update()
-		{
-			if (Input.GetKey(KeyCode.Z) || input == "-")
-			{
-
-			}
-		}
 	}
 }
 

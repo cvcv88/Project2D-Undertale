@@ -13,6 +13,11 @@ public class FloweyController : MonoBehaviour
 
     public bool DialogueActive()
     {
-        return dialogue.activeInHierarchy; // 활성상태인지 return
+        return dialogue.activeInHierarchy;
+    }
+
+    public void SelfDestroy()
+    {
+        Destroy(this.gameObject);
     }
 }

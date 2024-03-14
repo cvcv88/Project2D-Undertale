@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -11,15 +13,25 @@ public class PlayerMove : MonoBehaviour
 	private Vector2 moveDir;
 
 	private FloweyController flowey;
+	private bool dialogueCheck = false;
 
 	private bool upFlag = false;
 	private bool downFlag = false;
 	private bool rightFlag = false;
 	private bool leftFlag = false;
 
+	[SerializeField] Image dialogueHolder;
+
+	[SerializeField] Image backGroundImage;
+	[SerializeField] Image battleBox;
+	[SerializeField] TextMeshProUGUI levelText;
+
 	private void FixedUpdate()
 	{
-		Move();
+		if (!inDialogue()) // trueÀÇ ! -> false
+		{
+			Move();
+		}
 	}
 
 	private void Update()
@@ -60,10 +72,23 @@ public class PlayerMove : MonoBehaviour
 			}
 			StopAnimation();
 		}
-	}
+		else
+		{
+			animator.SetTrigger("Stop");
+		}
 
+		if (dialogueCheck && !dialogueHolder.transform.GetChild
+			(dialogueHolder.transform.childCount - 1).gameObject.activeInHierarchy)
+		{
+			// backGroundImage.gameObject.SetActive(true);
+			transform.position = new Vector3(26, 8, 0);
+		}
+	}
+	int a;
 	private void Move()
 	{
+		a++;
+		Debug.Log($"{a}");
 		transform.position += new Vector3(moveDir.x * moveSpeed, moveDir.y * moveSpeed, 0) * Time.deltaTime;
 	}
 
@@ -108,6 +133,7 @@ public class PlayerMove : MonoBehaviour
 		{
 			flowey = collision.gameObject.GetComponent<FloweyController>();
 			flowey.ActivateDialogue();
+			dialogueCheck = true;
 		}
 	}
 
