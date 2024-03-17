@@ -16,9 +16,9 @@ namespace DialogueSystem // 충돌 최소화하기 위해 namespace 사용
 			for(int i = 0; i < input.Length; i++)
 			{
 				textHolder.text += input[i];
-				SoundManager.instance.PlaySound(sound);
-				yield return new WaitForSeconds(delay);
-			}
+                SoundManager.instance.PlaySound(sound);
+                yield return new WaitForSeconds(delay);
+            }
 			yield return new WaitForSeconds(delayBetweenLine);
 
 			finished = true;

@@ -13,23 +13,14 @@ namespace DialogueSystem
 			StartCoroutine(DialogueSequence());
 		}
 
-		private void Update()
-		{
-			if (Input.GetKey(KeyCode.Z))
-			{
-				Deactivate();
-				animator.SetTrigger("Skip");
-				gameObject.SetActive(false);
-				audioSource.Stop();
-			}
-		}
+		static int i = 0;
 
-		private IEnumerator DialogueSequence()
+        private IEnumerator DialogueSequence()
 		{
-			for (int i = 0; i < transform.childCount; i++)
+			for (i = 0; i < transform.childCount; i++)
 			{
-				Deactivate();
-				transform.GetChild(i).gameObject.SetActive(true);
+                Deactivate();
+                transform.GetChild(i).gameObject.SetActive(true);
 				yield return new WaitUntil(() => transform.GetChild(i).GetComponent<DialogueLine>().finished);
 
 				animator.SetTrigger("Next");
@@ -41,10 +32,20 @@ namespace DialogueSystem
 				}
 				if (i == transform.childCount - 2)
 					audioSource.Stop();
-			}
-			gameObject.SetActive(false);
+            }
+        }
+
+		private void Update()
+		{
+			if (Input.GetKey(KeyCode.Z))
+			{
+                animator.SetTrigger("Skip");
+                transform.GetChild(i).gameObject.SetActive(false);
+                transform.GetChild(12).gameObject.SetActive(true);
+            }
 		}
-		private void Deactivate()
+ 
+        private void Deactivate()
 		{
 			for (int i = 0; i < transform.childCount; i++)
 			{

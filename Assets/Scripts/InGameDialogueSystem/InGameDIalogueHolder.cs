@@ -10,7 +10,7 @@ namespace InGameDialogueSystem
 			StartCoroutine(DialogueSequence());
 		}
 
-		private IEnumerator DialogueSequence()
+        private IEnumerator DialogueSequence()
 		{
 			for (int i = 0; i < transform.childCount - 1; i++)
 			{

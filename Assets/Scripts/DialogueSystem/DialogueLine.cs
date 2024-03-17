@@ -29,6 +29,6 @@ namespace DialogueSystem
 		{
 			StartCoroutine(WriteText(input, textHolder, textColor, textFont, delay, sound, delayBetweenLine));
 		}
-	}
+    }
 }
 

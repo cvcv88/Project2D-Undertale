@@ -6,23 +6,29 @@ using UnityEngine.UI;
 public class FloweyBattle : MonoBehaviour
 {
 	[SerializeField] PlayerMove playerMove;
-	[SerializeField] Canvas backGroundCanvas;
+	[SerializeField] GameObject Dialogue;
 	[SerializeField] GameObject player;
 	[SerializeField] SpriteRenderer playerSprite;
 
 	private bool coroutineCheck = false;
+	private bool dialogueCheck = false;
 
-	private void Update()
+    RuinScene RuinScene = new RuinScene();
+
+    private void Update()
 	{
-		if (backGroundCanvas.transform.GetChild(0).gameObject.activeInHierarchy)
+		DialogueCheck();
+		if (!Dialogue.transform.GetChild(7).gameObject.activeInHierarchy && dialogueCheck)
 		{
 			StartCoroutine(HeartBlink());
 			CoroutineCheckFunc();
-			backGroundCanvas.transform.GetChild(1).gameObject.SetActive(true);
+            Dialogue.transform.GetChild(1).gameObject.SetActive(true);
 		}
-	}
+    }
+
 	private IEnumerator HeartBlink()
 	{
+		dialogueCheck = true;
 		yield return new WaitForSeconds(0.1f);
 		playerMove.transform.GetChild(1).gameObject.SetActive(true);
 		yield return new WaitForSeconds(0.1f);
@@ -34,12 +40,27 @@ public class FloweyBattle : MonoBehaviour
 		if (player.transform.GetChild(1).gameObject.activeInHierarchy)
 		{
 			playerSprite.enabled = false;
-		}
+            AllCheck();
+        }
 	}
 
-	void CoroutineCheckFunc()
+	public void CoroutineCheckFunc()
 	{
 		if (coroutineCheck)
 			StopAllCoroutines();
 	}
+
+	public void DialogueCheck()
+	{
+		if (Dialogue.transform.GetChild(0).gameObject.activeInHierarchy)
+			dialogueCheck = true;
+    }
+
+	public void AllCheck()
+	{
+        if (dialogueCheck && coroutineCheck)
+        {
+            RuinScene.SceneChange();
+        }
+    }
 }

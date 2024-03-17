@@ -17,7 +17,6 @@ namespace InGameDialogueSystem
 		[SerializeField] private float delayBetweenLine;
 
 		[Header("Character Image")]
-		// [SerializeField] private Sprite characterSprite;
 		[SerializeField] private Image imageHolder;
 
 		[Header("Sound")]
@@ -28,7 +27,6 @@ namespace InGameDialogueSystem
 			textHolder = GetComponent<Text>();
 			textHolder.text = "";
 
-			// imageHolder.sprite = characterSprite;
 			imageHolder.preserveAspect = true;
 		}
 

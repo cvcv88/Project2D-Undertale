@@ -36,16 +36,22 @@ public class SceneManager : Singleton<SceneManager>
 
     IEnumerator LoadingRoutine(string sceneName)
     {
+        fade.gameObject.SetActive(true);
         yield return FadeOut();
 
         Manager.Pool.ClearPool();
-        // Manager.Sound.StopSFX();
+       //  Manager.Sound.StopSFX();
         Manager.UI.ClearPopUpUI();
         Manager.UI.ClearWindowUI();
-        Manager.UI.CloseInGameUI();
+
+        BaseScene curScene = GetCurScene();
+
+        yield return FadeIn();
+        
+        // curScene.OnLoadingEnd();
 
         Time.timeScale = 0f;
-        loadingBar.gameObject.SetActive(true);
+        //loadingBar.gameObject.SetActive(true);
 
         AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
         while (oper.isDone == false)
@@ -56,19 +62,19 @@ public class SceneManager : Singleton<SceneManager>
 
         Manager.UI.EnsureEventSystem();
 
-        BaseScene curScene = GetCurScene();
-        yield return curScene.LoadingRoutine();
-
         loadingBar.gameObject.SetActive(false);
         Time.timeScale = 1f;
 
-        yield return FadeIn();
+        curScene = GetCurScene();
+        //yield return curScene.LoadingRoutine();
+
+        fade.gameObject.SetActive(false);
     }
 
     IEnumerator FadeOut()
     {
         float rate = 0;
-        Color fadeOutColor = new Color(fade.color.r, fade.color.g, fade.color.b, 1f);
+        Color fadeOutColor = new Color(fade.color.r, fade.color.g, fade.color.b, 0f);
         Color fadeInColor = new Color(fade.color.r, fade.color.g, fade.color.b, 0f);
 
         while (rate <= 1)
@@ -82,8 +88,8 @@ public class SceneManager : Singleton<SceneManager>
     IEnumerator FadeIn()
     {
         float rate = 0;
-        Color fadeOutColor = new Color(fade.color.r, fade.color.g, fade.color.b, 1f);
-        Color fadeInColor = new Color(fade.color.r, fade.color.g, fade.color.b, 0f);
+        Color fadeOutColor = new Color(fade.color.r, fade.color.g, fade.color.b, 0f);
+        Color fadeInColor = new Color(fade.color.r, fade.color.g, fade.color.b, 1f);
 
         while (rate <= 1)
         {

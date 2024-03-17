@@ -22,10 +22,6 @@ public class PlayerMove : MonoBehaviour
 
 	[SerializeField] Image dialogueHolder;
 
-	[SerializeField] Image backGroundImage;
-	[SerializeField] Image battleBox;
-	[SerializeField] TextMeshProUGUI levelText;
-
 	private void FixedUpdate()
 	{
 		if (!inDialogue()) // trueÀÇ ! -> false
@@ -80,15 +76,12 @@ public class PlayerMove : MonoBehaviour
 		if (dialogueCheck && !dialogueHolder.transform.GetChild
 			(dialogueHolder.transform.childCount - 1).gameObject.activeInHierarchy)
 		{
-			// backGroundImage.gameObject.SetActive(true);
 			transform.position = new Vector3(26, 8, 0);
+			dialogueCheck = false;
 		}
 	}
-	int a;
 	private void Move()
 	{
-		a++;
-		Debug.Log($"{a}");
 		transform.position += new Vector3(moveDir.x * moveSpeed, moveDir.y * moveSpeed, 0) * Time.deltaTime;
 	}
 
