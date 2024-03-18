@@ -42,6 +42,7 @@ namespace DialogueSystem
                 animator.SetTrigger("Skip");
                 transform.GetChild(i).gameObject.SetActive(false);
                 transform.GetChild(12).gameObject.SetActive(true);
+				audioSource.Stop();
             }
 		}
  

@@ -22,6 +22,8 @@ public class PlayerMove : MonoBehaviour
 
 	[SerializeField] Image dialogueHolder;
 
+	[SerializeField] AudioSource audioSource;
+
 	private void FixedUpdate()
 	{
 		if (!inDialogue()) // trueÀÇ ! -> false

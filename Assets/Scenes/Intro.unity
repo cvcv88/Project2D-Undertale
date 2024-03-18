@@ -1706,7 +1706,7 @@ MonoBehaviour:
   textFont: {fileID: 12800000, guid: 0e5ab86f524f6474da0d591eb36d302f, type: 3}
   delay: 0.1
   delayBetweenLine: 3
-  sound: {fileID: 8300000, guid: c18907fc32335f645b777adf47bedbf0, type: 3}
+  sound: {fileID: 0}
 --- !u!114 &1372060892
 MonoBehaviour:
   m_ObjectHideFlags: 0

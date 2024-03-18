@@ -7,12 +7,11 @@ using UnityEngine.UI;
 
 public class HeartMove : MonoBehaviour
 {
-    
-    [SerializeField] float moveSpeed;
+	[SerializeField] Animator animator;
+	[SerializeField] float moveSpeed;
     private Vector2 moveDir;
 
     private FloweyController flowey;
-    private bool dialogueCheck = false;
 
     [SerializeField] Image dialogueHolder;
 
@@ -36,6 +35,10 @@ public class HeartMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.tag == "Bullet")
+        {
+            animator.SetTrigger("Hit");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

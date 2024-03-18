@@ -10,10 +10,9 @@ public class ChangeIntro : MonoBehaviour
 
 	public GameObject scrollImage;
 
-	Coroutine coroutine;
 	private void Start()
 	{
-		coroutine = StartCoroutine(ChangeIntroImages());
+		StartCoroutine(ChangeIntroImages());
 	}
 
 	IEnumerator ChangeIntroImages()
